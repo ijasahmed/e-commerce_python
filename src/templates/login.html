@@ -1,0 +1,49 @@
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />-->
+<!--<title>Untitled Document</title>-->
+<!--</head>-->
+{% extends 'index.html' %}
+{% block body %}
+<body>
+<form id="form1" name="form1" method="post" action="login">
+  <div align="center">
+    <table id="customers">
+      <tr>
+        <th scope="row">username</th>
+        <td><label>
+          <input type="text" name="textfield" required/>
+        </label></td>
+      </tr>
+      <tr>
+        <th scope="row">password</th>
+        <td><label>
+          <input type="password" name="textfield2" required />
+        </label></td>
+      </tr>
+      <tr>
+        <td colspan="2" scope="row"><label>
+          <div align="center">
+
+            <input type="submit" name="Submit" value="Login" class="btn btn-secondary btn-lg"   />
+            <br>
+        <br>
+            Create an account:  User: <a href="/userreg#about">Create</a>
+            Shop:  <a href="shopreg#about">Create</a>
+        </label></td>
+      </tr>
+      <td colspan="2" scope="row"><br>
+
+
+
+
+
+        </label></td>
+      </tr>
+      </table>
+  </div>
+</form>
+</body>
+{% endblock %}
+<!--</html>-->

@@ -1,0 +1,45 @@
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />-->
+<!--<title>Untitled Document</title>-->
+<!--</head>-->
+
+{% extends 'shopindex.html' %}
+{% block body %}
+<body>
+<div style="overflow:scroll;width:1300px;height:auto">
+<form id="form1" name="form1" method="post" action="/addproduct#about">
+  <table id="customers">
+    <tr>
+      <th scope="col">Product name </th>
+      <th scope="col">Image</th>
+      <th scope="col">price</th>
+      <th scope="col">Stock</th>
+      <th scope="col">Description</th>
+      <th scope="col">&nbsp;</th>
+    </tr>
+    {% for i in val %}
+    <tr>
+      <td>{{i[1]}}&nbsp;</td>
+      <td><img src="{{i[6]}}" hieght = "180" width="100"></td>
+      <td>{{i[3]}}&nbsp;</td>
+      <td>&nbsp;{{i[4]}}</td>
+      <td>{{i[2]}}&nbsp;</td>
+      <td><p><a href="/edit_product?id={{i[0]}}#about">edit</a></p>
+      <p><a href="/delete_product?id={{i[0]}}">delete</a></p></td>
+    </tr>
+    {% endfor %}
+    <tr>
+      <td colspan="5"><div align="center">
+        <label>
+        <input type="submit" name="Submit" value="Add" />
+        </label>
+      </div></td>
+    </tr>
+  </table>
+</form>
+</div>
+</body>
+<!--</html>-->
+{% endblock %}

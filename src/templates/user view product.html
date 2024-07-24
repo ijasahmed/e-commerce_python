@@ -1,0 +1,112 @@
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />-->
+<!--<title>Untitled Document</title>-->
+<!--</head>-->
+{% extends 'userindex.html' %}
+{% block body %}
+<head>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <link href='style.css' rel='stylesheet' type='text/css'>
+		<script src="jquery-3.2.1.js"></script>
+		<script type='text/javascript'>
+		var recognition = new webkitSpeechRecognition();
+
+		recognition.onresult = function(event) {
+			console.log('result');
+		  	var saidText = "";
+		  	for (var i = event.resultIndex; i < event.results.length; i++) {
+		        if (event.results[i].isFinal) {
+		            saidText = event.results[i][0].transcript;
+		        } else {
+		            saidText += event.results[i][0].transcript;
+		        }
+		    }
+
+		    document.getElementById('speechText').value = saidText;
+
+
+
+
+		   	// Search Posts
+		   	searchPosts(saidText);
+		}
+
+		function startRecording(){
+			recognition.start();
+		}
+
+		// Search Posts
+		function searchPosts(saidText){
+
+			$.ajax({
+				url: '/index',
+				type: 'post',
+				data: {speechText: saidText},
+				success: function(response){
+					$('.cont').empty();
+					$('.cont').append(response);
+//                    alert(response)
+				}
+			});
+		}
+
+		</script>
+
+
+</head>
+<body>
+<div align="center">
+
+  <div class='search_container'>
+    <table><tr>
+			<!-- Search box-->
+<td><img src="../static/assets/img/60955.png" width="60px" height="50px" onclick='startRecording()'class="btn btn-primary"></td>
+			<td><input type='text' id='speechText' name="speechText" class="form-control" size="80px"></td><td>&nbsp;
+
+
+      <!--<input type='button' id='start' value='Start' class="btn btn-primary" onclick='startRecording();'>-->
+    </td>
+		</tr></table></div>
+</div>
+<br/>
+<form id="form1" name="form1" method="post" action="">
+<div  style="overflow:scroll;width:1300px;height:auto">
+<div class="cont">
+
+
+
+  <table id="customers">
+    <tr>
+      <th scope="col">Product name</th>
+      <th scope="col">Image</th>
+      <th scope="col">Description</th>
+      <th scope="col">Price</th>
+      <th  scope="col">Rating</th>
+      <th scope="col">Stock</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+    {% for i in val %}
+    <tr>
+      <td>&nbsp;{{i[1]}} </td>
+      <td><img src="{{i[6]}}"  hieght = "150" width="150" >
+       </td>
+      <td>&nbsp;{{i[2]}}</td>
+      <td>&nbsp;{{i[3]}}</td>
+      <td>&nbsp;{{i[7]}}</td>
+      <td>&nbsp;{{i[4]}}</td>
+      <!--<td>&nbsp;<a href="/userviewproduct_rating?id={{i[0]}}#about">Rating </a></td>-->
+      <td>&nbsp<a href="/viewoffer?id={{i[0]}}#about">Offer </a></td>
+      <td><a href="/book?id={{i[0]}}&price={{i[3]}}#about">Book </a>{{i[]}}</td>
+
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+</div>
+  </form>
+</body>
+<!--</html>-->
+{% endblock %}
